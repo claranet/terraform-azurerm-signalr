@@ -21,4 +21,6 @@ resource "azurerm_signalr_service" "signalr" {
       value = features.value.value
     }
   }
+
+  tags = merge(local.default_tags, var.extra_tags)
 }
