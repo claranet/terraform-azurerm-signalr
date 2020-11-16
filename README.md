@@ -85,7 +85,7 @@ module "signalr" {
 | location | Azure location for App Service Plan. | `string` | n/a | yes |
 | location\_short | Short string for Azure location. | `string` | n/a | yes |
 | name\_prefix | Name prefix for all resources generated name | `string` | `""` | no |
-| network\_rules | Network Rules to apply to SignalR.<br>`name` Name of the rule<br>`rule_type` allowed values are allow or deny<br>`endpoint` allowed values public-network or the name of the private link<br>`allowed_services` allowed values ["ClientConnection", "ServerConnection", "RESTAPI"] | <pre>list(object({<br>    name      = string<br>    rule_type = string<br>    endpoint  = string<br>    services  = list(string)<br>  }))</pre> | `[]` | no |
+| network\_rules | Network Rules to apply to SignalR.<br>`name` Name of the rule<br>`rule_type` allowed values are allow or deny<br>`endpoint` allowed values public-network or the name of the private link<br>`services` allowed values ["ClientConnection", "ServerConnection", "RESTAPI"] | <pre>list(object({<br>    name      = string<br>    rule_type = string<br>    endpoint  = string<br>    services  = list(string)<br>  }))</pre> | `[]` | no |
 | resource\_group\_name | Resource group name | `string` | n/a | yes |
 | sku | Signalr SKU | <pre>object({<br>    name     = string,<br>    capacity = number<br>  })</pre> | <pre>{<br>  "capacity": 1,<br>  "name": "Free_F1"<br>}</pre> | no |
 | stack | Stack name | `string` | n/a | yes |

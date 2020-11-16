@@ -73,7 +73,7 @@ Network Rules to apply to SignalR.
 `name` Name of the rule
 `rule_type` allowed values are allow or deny
 `endpoint` allowed values public-network or the name of the private link
-`allowed_services` allowed values ["ClientConnection", "ServerConnection", "RESTAPI"]
+`services` allowed values ["ClientConnection", "ServerConnection", "RESTAPI"]
 EOD
   type = list(object({
     name      = string
