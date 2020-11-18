@@ -13,7 +13,6 @@ This terraform module creates an [Azure SignalR service](https://azure.microsoft
 | >= 2.x.x       | 0.12.x            | < 2.0           |
 | <  2.x.x       | 0.11.x            | < 2.0           |
 
-
 ## Usage
 
 This module is optimized to work with the [Claranet terraform-wrapper](https://github.com/claranet/terraform-wrapper) tool
