@@ -8,7 +8,7 @@ resource "azurerm_signalr_service" "signalr" {
   }
 
   dynamic "cors" {
-    for_each = var.allowed_origins
+    for_each = length(var.allowed_origins) > 0 ? ["fake"] : []
     content {
       allowed_origins = var.allowed_origins
     }
