@@ -1,4 +1,4 @@
-# Unreleased
+# v4.0.1 - 2021-01-08
 
 Fixed
   * AZ-401: Fix cors block
