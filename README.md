@@ -7,7 +7,8 @@ This terraform module creates an [Azure SignalR service](https://azure.microsoft
 ## Version compatibility
 
 | Module version | Terraform version | AzureRM version |
-|----------------|-------------------| --------------- |
+| -------------- | ----------------- | --------------- |
+| >= 5.x.x       | 0.15.x & 1.0.x    | >= 2.0          |
 | >= 4.x.x       | 0.13.x            | >= 2.0          |
 | >= 3.x.x       | 0.12.x            | >= 2.0          |
 | >= 2.x.x       | 0.12.x            | < 2.0           |
@@ -71,6 +72,26 @@ module "signalr" {
 }
 ```
 
+<!-- BEGIN_TF_DOCS -->
+## Providers
+
+| Name | Version |
+|------|---------|
+| azurerm | >= 2.0 |
+| null | >= 2.0 |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+|------|------|
+| [azurerm_signalr_service.signalr](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/signalr_service) | resource |
+| [null_resource.signalr_rule](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
+| [azurerm_subscription.current](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/subscription) | data source |
+
 ## Inputs
 
 | Name | Description | Type | Default | Required |
@@ -101,7 +122,7 @@ module "signalr" {
 | secondary\_access\_key | The secondary access key for the SignalR service. |
 | secondary\_connection\_string | The secondary connection string for the SignalR service. |
 | server\_port | The publicly accessible port of the SignalR service which is designed for customer server side use. |
-
+<!-- END_TF_DOCS -->
 ## Related documentations
 
   * [SignalR Documentation](https://docs.microsoft.com/en-us/azure/azure-signalr/signalr-overview)

@@ -1,6 +1,6 @@
 data "azurerm_subscription" "current" {}
 
-resource "null_resource" "signalr-rule" {
+resource "null_resource" "signalr_rule" {
   for_each = { for rule in var.network_rules : rule.name => rule }
   triggers = {
     rule_name = each.value.name
