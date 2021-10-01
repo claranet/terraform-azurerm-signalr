@@ -4,7 +4,8 @@
 This terraform module creates an [Azure SignalR service](https://azure.microsoft.com/en-us/services/signalr-service/) and its associated Network Rules when needed.
 [Diagnostic settings](https://docs.microsoft.com/en-us/azure/diagnostics) are also deployed.
 
-## Version compatibility
+<!-- BEGIN_TF_DOCS -->
+## Global versioning rule for Claranet Azure modules
 
 | Module version | Terraform version | AzureRM version |
 | -------------- | ----------------- | --------------- |
@@ -21,7 +22,7 @@ which set some terraform variables in the environment needed by this module.
 More details about variables set by the `terraform-wrapper` available in the [documentation](https://github.com/claranet/terraform-wrapper#environment).
 
 ```hcl
-module "azure-region" {
+module "azure_region" {
   source  = "claranet/regions/azurerm"
   version = "x.x.x"
 
@@ -32,7 +33,7 @@ module "rg" {
   source  = "claranet/rg/azurerm"
   version = "x.x.x"
 
-  location    = module.azure-region.location
+  location    = module.azure_region.location
   client_name = var.client_name
   environment = var.environment
   stack       = var.stack
@@ -42,12 +43,11 @@ module "signalr" {
   source  = "claranet/signalr/azurerm"
   version = "x.x.x"
 
-  client_name = var.client_name
-  environment = var.environment
-  stack       = var.stack
-
-  location            = module.azure-region.location
-  location_short      = module.azure-region.location_short
+  client_name         = var.client_name
+  environment         = var.environment
+  stack               = var.stack
+  location            = module.azure_region.location
+  location_short      = module.azure_region.location_short
   resource_group_name = module.rg.resource_group_name
 
   sku = {
@@ -70,9 +70,9 @@ module "signalr" {
     }
   ]
 }
+
 ```
 
-<!-- BEGIN_TF_DOCS -->
 ## Providers
 
 | Name | Version |
