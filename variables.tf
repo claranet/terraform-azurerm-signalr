@@ -58,15 +58,6 @@ variable "allowed_origins" {
   default     = []
 }
 
-variable "features" {
-  description = "Signalr features to enable"
-  type = list(object({
-    flag  = string,
-    value = string
-  }))
-  default = []
-}
-
 variable "network_rules" {
   description = <<EOD
 Network Rules to apply to SignalR.
@@ -88,4 +79,28 @@ variable "extra_tags" {
   description = "Tags to add to the resource"
   type        = map(string)
   default     = null
+}
+
+variable "connectivity_logs_enabled" {
+  description = "Specifies if Connectivity Logs are enabled or not"
+  type        = bool
+  default     = false
+}
+
+variable "messaging_logs_enabled" {
+  description = "Specifies if Messaging Logs are enabled or not"
+  type        = bool
+  default     = false
+}
+
+variable "live_trace_enabled" {
+  description = "Specifies if Live Trace is enabled or not"
+  type        = bool
+  default     = false
+}
+
+variable "service_mode" {
+  description = "Specifies the service mode"
+  type        = string
+  default     = "Default"
 }

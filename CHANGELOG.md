@@ -2,6 +2,7 @@
 
 Changed
   * AZ-572: Revamp examples and improve CI
+  * AZ-658: Fix deprecated `features` variable
 
 # v4.0.2 - 2021-08-27
 

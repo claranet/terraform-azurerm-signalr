@@ -14,13 +14,10 @@ resource "azurerm_signalr_service" "signalr" {
     }
   }
 
-  dynamic "features" {
-    for_each = var.features
-    content {
-      flag  = features.value.flag
-      value = features.value.value
-    }
-  }
+  connectivity_logs_enabled = var.connectivity_logs_enabled
+  messaging_logs_enabled    = var.messaging_logs_enabled
+  live_trace_enabled        = var.live_trace_enabled
+  service_mode              = var.service_mode
 
   tags = merge(local.default_tags, var.extra_tags)
 }
