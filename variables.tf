@@ -75,12 +75,6 @@ EOD
   default = []
 }
 
-variable "extra_tags" {
-  description = "Tags to add to the resource"
-  type        = map(string)
-  default     = null
-}
-
 variable "connectivity_logs_enabled" {
   description = "Specifies if Connectivity Logs are enabled or not"
   type        = bool
