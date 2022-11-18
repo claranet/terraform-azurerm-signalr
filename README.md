@@ -78,7 +78,7 @@ module "signalr" {
 
 | Name | Version |
 |------|---------|
-| azurecaf | ~> 1.1 |
+| azurecaf | ~> 1.2, >= 1.2.22 |
 | azurerm | >= 2.90 |
 | null | >= 2.0 |
 
@@ -90,9 +90,9 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [azurecaf_name.signalr](https://registry.terraform.io/providers/aztfmod/azurecaf/latest/docs/resources/name) | resource |
 | [azurerm_signalr_service.signalr](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/signalr_service) | resource |
 | [null_resource.signalr_rule](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
+| [azurecaf_name.signalr](https://registry.terraform.io/providers/aztfmod/azurecaf/latest/docs/data-sources/name) | data source |
 | [azurerm_subscription.current](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/subscription) | data source |
 
 ## Inputs

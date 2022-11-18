@@ -1,4 +1,4 @@
-resource "azurecaf_name" "signalr" {
+data "azurecaf_name" "signalr" {
   name          = var.stack
   resource_type = "azurerm_signalr_service"
   prefixes      = var.name_prefix == "" ? null : [local.name_prefix]
