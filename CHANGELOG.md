@@ -1,3 +1,8 @@
+# Unreleased
+
+Added
+  * AZ-1089: Option to enable the public access
+
 # v5.1.0 - 2022-11-23
 
 Changed

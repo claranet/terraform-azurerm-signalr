@@ -86,3 +86,9 @@ variable "service_mode" {
   type        = string
   default     = "Default"
 }
+
+variable "public_network_access_enabled" {
+  description = "Specifies if the public access is enabled or not."
+  type        = bool
+  default     = false
+}
