@@ -86,7 +86,7 @@ module "signalr" {
 | Name | Version |
 |------|---------|
 | azurecaf | ~> 1.2, >= 1.2.22 |
-| azurerm | >= 2.90 |
+| azurerm | >= 3.58 |
 | null | >= 2.0 |
 
 ## Modules
@@ -120,6 +120,7 @@ No modules.
 | name\_prefix | Optional prefix for the generated name | `string` | `""` | no |
 | name\_suffix | Optional suffix for the generated name | `string` | `""` | no |
 | network\_rules | Network Rules to apply to SignalR.<br>`name` Name of the rule<br>`rule_type` allowed values are allow or deny<br>`endpoint` allowed values public-network or the name of the private link<br>`services` allowed values ["ClientConnection", "ServerConnection", "RESTAPI"] | <pre>list(object({<br>    name      = string<br>    rule_type = string<br>    endpoint  = string<br>    services  = list(string)<br>  }))</pre> | `[]` | no |
+| public\_network\_access\_enabled | Specifies if the public access is enabled or not. | `bool` | `false` | no |
 | resource\_group\_name | Resource group name | `string` | n/a | yes |
 | service\_mode | Specifies the service mode | `string` | `"Default"` | no |
 | sku | Signalr SKU | <pre>object({<br>    name     = string,<br>    capacity = number<br>  })</pre> | <pre>{<br>  "capacity": 1,<br>  "name": "Free_F1"<br>}</pre> | no |
