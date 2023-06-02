@@ -1,5 +1,8 @@
 # Unreleased
 
+Breaking
+  * AZ-1089: Bump minimum Terraform version to `1.1`
+
 Added
   * AZ-1089: Option to enable the public access
 
