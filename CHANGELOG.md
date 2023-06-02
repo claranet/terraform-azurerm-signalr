@@ -1,4 +1,4 @@
-# Unreleased
+# v6.0.0 - 2023-06-02
 
 Breaking
   * AZ-1089: Bump minimum Terraform version to `1.1`
