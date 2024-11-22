@@ -14,8 +14,8 @@ resource "null_resource" "signalr_rule" {
 az signalr network-rule update \
   --${each.value.rule_type} ${join(" ", each.value.services)} \
   ${each.value.endpoint == "public-network" ? "--public-network" : format("--connection-name %s", each.value.endpoint)} \
-  --name ${azurerm_signalr_service.signalr.name} \
-  --resource-group ${azurerm_signalr_service.signalr.resource_group_name} \
+  --name ${azurerm_signalr_service.main.name} \
+  --resource-group ${azurerm_signalr_service.main.resource_group_name} \
   --subscription ${data.azurerm_subscription.current.subscription_id}
 EOC
   }

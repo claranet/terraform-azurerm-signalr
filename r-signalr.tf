@@ -1,4 +1,4 @@
-resource "azurerm_signalr_service" "signalr" {
+resource "azurerm_signalr_service" "main" {
   location            = var.location
   name                = local.name
   resource_group_name = var.resource_group_name
@@ -21,4 +21,9 @@ resource "azurerm_signalr_service" "signalr" {
   public_network_access_enabled = var.public_network_access_enabled
 
   tags = merge(local.default_tags, var.extra_tags)
+}
+
+moved {
+  from = azurerm_signalr_service.signalr
+  to   = azurerm_signalr_service.main
 }
