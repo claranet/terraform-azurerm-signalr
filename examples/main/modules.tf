@@ -14,7 +14,5 @@ module "signalr" {
     capacity = 1
   }
 
-  public_network {
-    allowed_request_types = ["ClientConnection"]
-  }
+  allowed_request_types = ["ClientConnection"]
 }
