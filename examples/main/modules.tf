@@ -14,18 +14,7 @@ module "signalr" {
     capacity = 1
   }
 
-  network_rules = [
-    {
-      name      = "AllowClientConnection"
-      rule_type = "allow"
-      endpoint  = "public-network"
-      services  = ["ClientConnection"]
-    },
-    {
-      name      = "DenyAllOthers"
-      rule_type = "deny"
-      endpoint  = "public-network"
-      services  = ["ServerConnection", "RESTAPI"]
-    }
-  ]
+  public_network {
+    allowed_request_types = ["ClientConnection"]
+  }
 }

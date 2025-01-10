@@ -51,20 +51,9 @@ module "signalr" {
     capacity = 1
   }
 
-  network_rules = [
-    {
-      name      = "AllowClientConnection"
-      rule_type = "allow"
-      endpoint  = "public-network"
-      services  = ["ClientConnection"]
-    },
-    {
-      name      = "DenyAllOthers"
-      rule_type = "deny"
-      endpoint  = "public-network"
-      services  = ["ServerConnection", "RESTAPI"]
-    }
-  ]
+  public_network {
+    allowed_request_types = ["ClientConnection"]
+  }
 }
 ```
 
@@ -74,7 +63,6 @@ module "signalr" {
 |------|---------|
 | azurecaf | ~> 1.2.28 |
 | azurerm | ~> 4.0 |
-| null | >= 3.0 |
 
 ## Modules
 
@@ -85,19 +73,21 @@ No modules.
 | Name | Type |
 |------|------|
 | [azurerm_signalr_service.main](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/signalr_service) | resource |
-| [null_resource.signalr_rule](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
+| [azurerm_signalr_service_network_acl.main](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/signalr_service_network_acl) | resource |
 | [azurecaf_name.signalr](https://registry.terraform.io/providers/claranet/azurecaf/latest/docs/data-sources/name) | data source |
-| [azurerm_subscription.current](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/subscription) | data source |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | allowed\_origins | A List of origins which should be able to make cross-origin calls. | `list(string)` | `[]` | no |
+| allowed\_request\_types | The allowed request types for the public network. Possible values are `ClientConnection`, `ServerConnection`, `RESTAPI` and `Trace`. When `default_action` is `Allow`, `allowed_request_types` cannot be set. | `list(string)` | n/a | yes |
 | client\_name | Client name/account used in naming. | `string` | n/a | yes |
 | connectivity\_logs\_enabled | Specifies if Connectivity Logs are enabled or not. | `bool` | `false` | no |
 | custom\_name | Custom name for the SignalR service, generated if not set. | `string` | `""` | no |
-| default\_tags\_enabled | Option to enable or disable default tag.s | `bool` | `true` | no |
+| default\_action | The default action to control the network access when no other rule matches. Possible values are `Allow` and `Deny`. | `string` | `"Deny"` | no |
+| default\_tags\_enabled | Option to enable or disable default tags. | `bool` | `true` | no |
+| denied\_request\_types | The denied request types for the public network. Possible values are `ClientConnection`, `ServerConnection`, `RESTAPI` and `Trace`. When `default_action` is `Deny`, `denied_request_types` cannot be set. | `list(string)` | n/a | yes |
 | environment | Project environment. | `string` | n/a | yes |
 | extra\_tags | Additional tags to associate with your autoscale setting. | `map(string)` | `null` | no |
 | live\_trace\_enabled | Specifies if Live Trace is enabled or not. | `bool` | `false` | no |
@@ -106,12 +96,15 @@ No modules.
 | messaging\_logs\_enabled | Specifies if Messaging Logs are enabled or not. | `bool` | `false` | no |
 | name\_prefix | Optional prefix for the generated name. | `string` | `""` | no |
 | name\_suffix | Optional suffix for the generated name. | `string` | `""` | no |
-| network\_rules | Network Rules to apply to SignalR.<br/>`name` Name of the rule<br/>`rule_type` allowed values are allow or deny<br/>`endpoint` allowed values public-network or the name of the private link<br/>`services` allowed values ["ClientConnection", "ServerConnection", "RESTAPI"] | <pre>list(object({<br/>    name      = string<br/>    rule_type = string<br/>    endpoint  = string<br/>    services  = list(string)<br/>  }))</pre> | `[]` | no |
+| private\_endpoint\_allowed\_request\_types | The allowed request types for the Private Endpoint Connection. Possible values are `ClientConnection`, `ServerConnection`, `RESTAPI` and `Trace`. When `default_action` is `Allow`, `allowed_request_types` cannot be set. | `list(string)` | n/a | yes |
+| private\_endpoint\_denied\_request\_types | The denied request types for the Private Endpoint Connection. Possible values are `ClientConnection`, `ServerConnection`, `RESTAPI` and `Trace`. When `default_action` is `Deny`, `denied_request_types` cannot be set. | `list(string)` | n/a | yes |
+| private\_endpoint\_id | The ID of the Private Endpoint. | `string` | n/a | yes |
 | public\_network\_access\_enabled | Specifies if the public access is enabled or not. | `bool` | `false` | no |
 | resource\_group\_name | Resource group name. | `string` | n/a | yes |
 | service\_mode | Specifies the service mode. | `string` | `"Default"` | no |
-| sku | Signalr SKU | <pre>object({<br/>    name     = string,<br/>    capacity = number<br/>  })</pre> | <pre>{<br/>  "capacity": 1,<br/>  "name": "Free_F1"<br/>}</pre> | no |
+| sku | SignalR SKU. | <pre>object({<br/>    name     = string,<br/>    capacity = number<br/>  })</pre> | <pre>{<br/>  "capacity": 1,<br/>  "name": "Free_F1"<br/>}</pre> | no |
 | stack | Project stack name. | `string` | n/a | yes |
+| upstream\_endpoint | Specifies the upstream endpoint for SignalR. For arguements please refer to [documentation](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/signalr_service#upstream_endpoint-4) | <pre>object({<br/>    url_template              = string<br/>    category_pattern          = list(string)<br/>    event_pattern             = list(string)<br/>    hub_pattern               = list(string)<br/>    user_assigned_identity_id = optional(string)<br/>  })</pre> | <pre>{<br/>  "category_pattern": [<br/>    "*"<br/>  ],<br/>  "event_pattern": [<br/>    "*"<br/>  ],<br/>  "hub_pattern": [<br/>    "*"<br/>  ],<br/>  "url_template": ""<br/>}</pre> | no |
 
 ## Outputs
 
