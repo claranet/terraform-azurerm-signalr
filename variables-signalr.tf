@@ -49,18 +49,13 @@ variable "public_network_access_enabled" {
 variable "upstream_endpoint" {
   description = "Specifies the upstream endpoint for SignalR. For arguements please refer to [documentation](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/signalr_service#upstream_endpoint-4)"
   type = object({
-    url_template              = string
-    category_pattern          = list(string)
-    event_pattern             = list(string)
-    hub_pattern               = list(string)
+    url_template              = optional(string, "")
+    category_pattern          = optional(list(string), ["*"])
+    event_pattern             = optional(list(string), ["*"])
+    hub_pattern               = optional(list(string), ["*"])
     user_assigned_identity_id = optional(string)
   })
-  default = {
-    url_template     = ""
-    category_pattern = ["*"]
-    event_pattern    = ["*"]
-    hub_pattern      = ["*"]
-  }
+  default = {}
 }
 
 # Signalr network rules
@@ -73,24 +68,29 @@ variable "default_action" {
 variable "allowed_request_types" {
   description = "The allowed request types for the public network. Possible values are `ClientConnection`, `ServerConnection`, `RESTAPI` and `Trace`. When `default_action` is `Allow`, `allowed_request_types` cannot be set."
   type        = list(string)
+  default     = null
 }
 
 variable "denied_request_types" {
   description = "The denied request types for the public network. Possible values are `ClientConnection`, `ServerConnection`, `RESTAPI` and `Trace`. When `default_action` is `Deny`, `denied_request_types` cannot be set."
   type        = list(string)
+  default     = null
 }
 
 variable "private_endpoint_id" {
   description = "The ID of the Private Endpoint."
   type        = string
+  default     = null
 }
 
 variable "private_endpoint_allowed_request_types" {
   description = "The allowed request types for the Private Endpoint Connection. Possible values are `ClientConnection`, `ServerConnection`, `RESTAPI` and `Trace`. When `default_action` is `Allow`, `allowed_request_types` cannot be set."
   type        = list(string)
+  default     = null
 }
 
 variable "private_endpoint_denied_request_types" {
   description = "The denied request types for the Private Endpoint Connection. Possible values are `ClientConnection`, `ServerConnection`, `RESTAPI` and `Trace`. When `default_action` is `Deny`, `denied_request_types` cannot be set."
   type        = list(string)
+  default     = null
 }
