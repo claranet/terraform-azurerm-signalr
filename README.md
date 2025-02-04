@@ -81,17 +81,15 @@ No modules.
 | allowed\_origins | A List of origins which should be able to make cross-origin calls. | `list(string)` | `[]` | no |
 | allowed\_request\_types | The allowed request types for the public network. Possible values are `ClientConnection`, `ServerConnection`, `RESTAPI` and `Trace`. When `default_action` is `Allow`, `allowed_request_types` cannot be set. | `list(string)` | `null` | no |
 | client\_name | Client name/account used in naming. | `string` | n/a | yes |
-| connectivity\_logs\_enabled | Specifies if Connectivity Logs are enabled or not. | `bool` | `false` | no |
 | custom\_name | Custom name for the SignalR service, generated if not set. | `string` | `""` | no |
 | default\_action | The default action to control the network access when no other rule matches. Possible values are `Allow` and `Deny`. | `string` | `"Deny"` | no |
 | default\_tags\_enabled | Option to enable or disable default tags. | `bool` | `true` | no |
 | denied\_request\_types | The denied request types for the public network. Possible values are `ClientConnection`, `ServerConnection`, `RESTAPI` and `Trace`. When `default_action` is `Deny`, `denied_request_types` cannot be set. | `list(string)` | `null` | no |
 | environment | Project environment. | `string` | n/a | yes |
 | extra\_tags | Additional tags to associate with your autoscale setting. | `map(string)` | `null` | no |
-| live\_trace\_enabled | Specifies if Live Trace is enabled or not. | `bool` | `false` | no |
+| live\_trace | Specifies if Live Trace is enabled or not. | <pre>object({<br/>    enabled                   = optional(bool, false)<br/>    messaging_logs_enabled    = optional(bool, false)<br/>    connectivity_logs_enabled = optional(bool, false)<br/>    http_request_logs_enabled = optional(bool, false)<br/>  })</pre> | `{}` | no |
 | location | Azure location for App Service Plan. | `string` | n/a | yes |
 | location\_short | Short string for Azure location. | `string` | n/a | yes |
-| messaging\_logs\_enabled | Specifies if Messaging Logs are enabled or not. | `bool` | `false` | no |
 | name\_prefix | Optional prefix for the generated name. | `string` | `""` | no |
 | name\_suffix | Optional suffix for the generated name. | `string` | `""` | no |
 | private\_endpoint\_allowed\_request\_types | The allowed request types for the Private Endpoint Connection. Possible values are `ClientConnection`, `ServerConnection`, `RESTAPI` and `Trace`. When `default_action` is `Allow`, `allowed_request_types` cannot be set. | `list(string)` | `null` | no |
@@ -102,7 +100,7 @@ No modules.
 | service\_mode | Specifies the service mode. | `string` | `"Default"` | no |
 | sku | SignalR SKU. | <pre>object({<br/>    name     = string,<br/>    capacity = number<br/>  })</pre> | <pre>{<br/>  "capacity": 1,<br/>  "name": "Free_F1"<br/>}</pre> | no |
 | stack | Project stack name. | `string` | n/a | yes |
-| upstream\_endpoint | Specifies the upstream endpoint for SignalR. For arguements please refer to [documentation](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/signalr_service#upstream_endpoint-4) | <pre>object({<br/>    url_template              = optional(string, "")<br/>    category_pattern          = optional(list(string), ["*"])<br/>    event_pattern             = optional(list(string), ["*"])<br/>    hub_pattern               = optional(list(string), ["*"])<br/>    user_assigned_identity_id = optional(string)<br/>  })</pre> | `{}` | no |
+| upstream\_endpoint | Specifies the upstream endpoint for SignalR. For arguements please refer to [documentation](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/signalr_service#upstream_endpoint-4) | <pre>object({<br/>    url_template              = optional(string, "")<br/>    category_pattern          = optional(list(string), ["*"])<br/>    event_pattern             = optional(list(string), ["*"])<br/>    hub_pattern               = optional(list(string), ["*"])<br/>    user_assigned_identity_id = optional(string)<br/>  })</pre> | `null` | no |
 
 ## Outputs
 

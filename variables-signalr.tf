@@ -16,22 +16,15 @@ variable "allowed_origins" {
   default     = []
 }
 
-variable "connectivity_logs_enabled" {
-  description = "Specifies if Connectivity Logs are enabled or not."
-  type        = bool
-  default     = false
-}
-
-variable "messaging_logs_enabled" {
-  description = "Specifies if Messaging Logs are enabled or not."
-  type        = bool
-  default     = false
-}
-
-variable "live_trace_enabled" {
+variable "live_trace" {
   description = "Specifies if Live Trace is enabled or not."
-  type        = bool
-  default     = false
+  type = object({
+    enabled                   = optional(bool, false)
+    messaging_logs_enabled    = optional(bool, false)
+    connectivity_logs_enabled = optional(bool, false)
+    http_request_logs_enabled = optional(bool, false)
+  })
+  default = {}
 }
 
 variable "service_mode" {
@@ -55,7 +48,7 @@ variable "upstream_endpoint" {
     hub_pattern               = optional(list(string), ["*"])
     user_assigned_identity_id = optional(string)
   })
-  default = {}
+  default = null
 }
 
 # Signalr network rules

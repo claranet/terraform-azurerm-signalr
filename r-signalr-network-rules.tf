@@ -7,9 +7,12 @@ resource "azurerm_signalr_service_network_acl" "main" {
     denied_request_types  = var.denied_request_types
   }
 
-  private_endpoint {
-    id                    = var.private_endpoint_id
-    allowed_request_types = var.private_endpoint_allowed_request_types
-    denied_request_types  = var.private_endpoint_denied_request_types
+  dynamic "private_endpoint" {
+    for_each = var.private_endpoint_id != null ? ["enabled"] : []
+    content {
+      id                    = var.private_endpoint_id
+      allowed_request_types = var.private_endpoint_allowed_request_types
+      denied_request_types  = var.private_endpoint_denied_request_types
+    }
   }
 }
