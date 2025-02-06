@@ -40,7 +40,7 @@ variable "public_network_access_enabled" {
 }
 
 variable "upstream_endpoint" {
-  description = "Specifies the upstream endpoint for SignalR. For arguements please refer to [documentation](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/signalr_service#upstream_endpoint-4)"
+  description = "Specifies the upstream endpoint for SignalR. For arguements please refer to [documentation](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/signalr_service#upstream_endpoint-4)."
   type = object({
     url_template              = optional(string, "")
     category_pattern          = optional(list(string), ["*"])

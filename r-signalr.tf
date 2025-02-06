@@ -24,13 +24,13 @@ resource "azurerm_signalr_service" "main" {
   public_network_access_enabled = var.public_network_access_enabled
 
   dynamic "upstream_endpoint" {
-    for_each = var.upstream_endpoint != null ? ["enabled"] : []
+    for_each = var.upstream_endpoint[*]
     content {
-      url_template              = var.upstream_endpoint.url_template
-      category_pattern          = var.upstream_endpoint.category_pattern
-      event_pattern             = var.upstream_endpoint.event_pattern
-      hub_pattern               = var.upstream_endpoint.hub_pattern
-      user_assigned_identity_id = var.upstream_endpoint.user_assigned_identity_id
+      url_template              = upstream_endpoint.value.url_template
+      category_pattern          = upstream_endpoint.value.category_pattern
+      event_pattern             = upstream_endpoint.value.event_pattern
+      hub_pattern               = upstream_endpoint.value.hub_pattern
+      user_assigned_identity_id = upstream_endpoint.value.user_assigned_identity_id
     }
   }
 

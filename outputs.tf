@@ -3,6 +3,11 @@ output "resource" {
   value       = azurerm_signalr_service.main
 }
 
+output "module_diagnostics" {
+  description = "Diagnostics settings module outputs."
+  value       = module.diagnostics
+}
+
 output "id" {
   description = "The ID of the SignalR service."
   value       = azurerm_signalr_service.main.id

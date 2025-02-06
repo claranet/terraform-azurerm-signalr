@@ -52,6 +52,11 @@ module "signalr" {
   }
 
   allowed_request_types = ["ClientConnection"]
+
+  logs_destinations_ids = [
+    module.logs.id,
+    module.logs.storage_account_id,
+  ]
 }
 ```
 
@@ -64,7 +69,9 @@ module "signalr" {
 
 ## Modules
 
-No modules.
+| Name | Source | Version |
+|------|--------|---------|
+| diagnostics | claranet/diagnostic-settings/azurerm | ~> 8.0.0 |
 
 ## Resources
 
@@ -85,11 +92,15 @@ No modules.
 | default\_action | The default action to control the network access when no other rule matches. Possible values are `Allow` and `Deny`. | `string` | `"Deny"` | no |
 | default\_tags\_enabled | Option to enable or disable default tags. | `bool` | `true` | no |
 | denied\_request\_types | The denied request types for the public network. Possible values are `ClientConnection`, `ServerConnection`, `RESTAPI` and `Trace`. When `default_action` is `Deny`, `denied_request_types` cannot be set. | `list(string)` | `null` | no |
+| diagnostic\_settings\_custom\_name | Custom name of the diagnostics settings, name will be `default` if not set. | `string` | `"default"` | no |
 | environment | Project environment. | `string` | n/a | yes |
 | extra\_tags | Additional tags to associate with your autoscale setting. | `map(string)` | `null` | no |
 | live\_trace | Specifies if Live Trace is enabled or not. | <pre>object({<br/>    enabled                   = optional(bool, false)<br/>    messaging_logs_enabled    = optional(bool, false)<br/>    connectivity_logs_enabled = optional(bool, false)<br/>    http_request_logs_enabled = optional(bool, false)<br/>  })</pre> | `{}` | no |
 | location | Azure location for App Service Plan. | `string` | n/a | yes |
 | location\_short | Short string for Azure location. | `string` | n/a | yes |
+| logs\_categories | Log categories to send to destinations. | `list(string)` | `null` | no |
+| logs\_destinations\_ids | List of destination resources IDs for logs diagnostic destination.<br/>Can be `Storage Account`, `Log Analytics Workspace` and `Event Hub`. No more than one of each can be set.<br/>If you want to use Azure EventHub as a destination, you must provide a formatted string containing both the EventHub Namespace authorization send ID and the EventHub name (name of the queue to use in the Namespace) separated by the <code>&#124;</code> character. | `list(string)` | n/a | yes |
+| logs\_metrics\_categories | Metrics categories to send to destinations. | `list(string)` | `null` | no |
 | name\_prefix | Optional prefix for the generated name. | `string` | `""` | no |
 | name\_suffix | Optional suffix for the generated name. | `string` | `""` | no |
 | private\_endpoint\_allowed\_request\_types | The allowed request types for the Private Endpoint Connection. Possible values are `ClientConnection`, `ServerConnection`, `RESTAPI` and `Trace`. When `default_action` is `Allow`, `allowed_request_types` cannot be set. | `list(string)` | `null` | no |
@@ -100,7 +111,7 @@ No modules.
 | service\_mode | Specifies the service mode. | `string` | `"Default"` | no |
 | sku | SignalR SKU. | <pre>object({<br/>    name     = string,<br/>    capacity = number<br/>  })</pre> | <pre>{<br/>  "capacity": 1,<br/>  "name": "Free_F1"<br/>}</pre> | no |
 | stack | Project stack name. | `string` | n/a | yes |
-| upstream\_endpoint | Specifies the upstream endpoint for SignalR. For arguements please refer to [documentation](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/signalr_service#upstream_endpoint-4) | <pre>object({<br/>    url_template              = optional(string, "")<br/>    category_pattern          = optional(list(string), ["*"])<br/>    event_pattern             = optional(list(string), ["*"])<br/>    hub_pattern               = optional(list(string), ["*"])<br/>    user_assigned_identity_id = optional(string)<br/>  })</pre> | `null` | no |
+| upstream\_endpoint | Specifies the upstream endpoint for SignalR. For arguements please refer to [documentation](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/signalr_service#upstream_endpoint-4). | <pre>object({<br/>    url_template              = optional(string, "")<br/>    category_pattern          = optional(list(string), ["*"])<br/>    event_pattern             = optional(list(string), ["*"])<br/>    hub_pattern               = optional(list(string), ["*"])<br/>    user_assigned_identity_id = optional(string)<br/>  })</pre> | `null` | no |
 
 ## Outputs
 
@@ -108,6 +119,7 @@ No modules.
 |------|-------------|
 | hostname | The FQDN of the SignalR service. |
 | id | The ID of the SignalR service. |
+| module\_diagnostics | Diagnostics settings module outputs. |
 | primary\_access\_key | The primary access key for the SignalR service. |
 | primary\_connection\_string | The primary connection string for the SignalR service. |
 | public\_port | The publicly accessible port of the SignalR service which is designed for browser/client use. |
