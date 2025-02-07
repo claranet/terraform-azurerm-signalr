@@ -1,22 +1,18 @@
-data "azurerm_subscription" "current" {}
+resource "azurerm_signalr_service_network_acl" "main" {
+  signalr_service_id = azurerm_signalr_service.main.id
+  default_action     = var.default_action
 
-resource "null_resource" "signalr_rule" {
-  for_each = { for rule in var.network_rules : rule.name => rule }
-  triggers = {
-    rule_name = each.value.name
-    rule_type = each.value.rule_type
-    endpoint  = each.value.endpoint
-    services  = join(",", each.value.services)
-
+  public_network {
+    allowed_request_types = var.allowed_request_types
+    denied_request_types  = var.denied_request_types
   }
-  provisioner "local-exec" {
-    command = <<EOC
-az signalr network-rule update \
-  --${each.value.rule_type} ${join(" ", each.value.services)} \
-  ${each.value.endpoint == "public-network" ? "--public-network" : format("--connection-name %s", each.value.endpoint)} \
-  --name ${azurerm_signalr_service.signalr.name} \
-  --resource-group ${azurerm_signalr_service.signalr.resource_group_name} \
-  --subscription ${data.azurerm_subscription.current.subscription_id}
-EOC
+
+  dynamic "private_endpoint" {
+    for_each = var.private_endpoint_id != null ? ["enabled"] : []
+    content {
+      id                    = var.private_endpoint_id
+      allowed_request_types = var.private_endpoint_allowed_request_types
+      denied_request_types  = var.private_endpoint_denied_request_types
+    }
   }
 }
