@@ -1,3 +1,52 @@
+## 7.0.0 (2025-02-07)
+
+### ⚠ BREAKING CHANGES
+
+* **AZ-1088:** AzureRM Provider v4+ and OpenTofu 1.8+
+
+### Features
+
+* **AZ-1088:** add diagnostic-settings 3d02f71
+* **AZ-1088:** module v8 structure and updates dfddcf3
+* **AZ-1088:** update resources 160c4b1
+
+### Bug Fixes
+
+* **AZ-1088:** change livetrace to block, change default upstream_endpoint to null 38177e1
+* **AZ-1088:** fix example e5a7a55
+* **AZ-1088:** fix variables ce1085f
+
+### Miscellaneous Chores
+
+* **deps:** update dependency opentofu to v1.8.3 691f66a
+* **deps:** update dependency opentofu to v1.8.4 5337162
+* **deps:** update dependency opentofu to v1.8.6 67b1e4f
+* **deps:** update dependency opentofu to v1.8.8 5ea9d3f
+* **deps:** update dependency opentofu to v1.9.0 3807647
+* **deps:** update dependency pre-commit to v4 7d44979
+* **deps:** update dependency pre-commit to v4.0.1 08c0187
+* **deps:** update dependency pre-commit to v4.1.0 1ffcc0b
+* **deps:** update dependency tflint to v0.54.0 83a334d
+* **deps:** update dependency tflint to v0.55.0 8a1e1f1
+* **deps:** update dependency tflint to v0.55.1 3f9c502
+* **deps:** update dependency trivy to v0.56.1 8947304
+* **deps:** update dependency trivy to v0.56.2 2c32f15
+* **deps:** update dependency trivy to v0.57.1 82743c2
+* **deps:** update dependency trivy to v0.58.1 94eb2fb
+* **deps:** update dependency trivy to v0.58.2 0122c65
+* **deps:** update dependency trivy to v0.59.0 2f66e43
+* **deps:** update dependency trivy to v0.59.1 880e823
+* **deps:** update pre-commit hook alessandrojcm/commitlint-pre-commit-hook to v9.19.0 628e599
+* **deps:** update pre-commit hook alessandrojcm/commitlint-pre-commit-hook to v9.20.0 8c04133
+* **deps:** update pre-commit hook pre-commit/pre-commit-hooks to v5 4c3d109
+* **deps:** update pre-commit hook tofuutils/pre-commit-opentofu to v2.1.0 581409f
+* **deps:** update tools 2ac1291
+* **deps:** update tools 2d91339
+* prepare for new examples structure 6ef1ea8
+* update examples structure 15f72f3
+* update Github templates 86ae563
+* update tflint config for v0.55.0 3dd4e66
+
 ## 6.1.0 (2024-10-03)
 
 ### Features
