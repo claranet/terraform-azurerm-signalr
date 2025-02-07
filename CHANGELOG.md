@@ -1,4 +1,4 @@
-## 7.0.0 (2025-02-07)
+## 7.0.0/8.0.0 (2025-02-07)
 
 ### ⚠ BREAKING CHANGES
 
@@ -12,7 +12,7 @@
 
 ### Bug Fixes
 
-* **AZ-1088:** change livetrace to block, change default upstream_endpoint to null 38177e1
+* **AZ-1088:** change livetrace to block, change default `upstream_endpoint` to null 38177e1
 * **AZ-1088:** fix example e5a7a55
 * **AZ-1088:** fix variables ce1085f
 
