@@ -63,20 +63,20 @@ module "signalr" {
 ## Providers
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | azurecaf | >= 1.2.28 |
 | azurerm | ~> 4.31 |
 
 ## Modules
 
 | Name | Source | Version |
-|------|--------|---------|
+| ---- | ------ | ------- |
 | diagnostics | claranet/diagnostic-settings/azurerm | ~> 8.2.0 |
 
 ## Resources
 
 | Name | Type |
-|------|------|
+| ---- | ---- |
 | [azurerm_signalr_service.main](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/signalr_service) | resource |
 | [azurerm_signalr_service_network_acl.main](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/signalr_service_network_acl) | resource |
 | [azurecaf_name.signalr](https://registry.terraform.io/providers/claranet/azurecaf/latest/docs/data-sources/name) | data source |
@@ -84,7 +84,7 @@ module "signalr" {
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
+| ---- | ----------- | ---- | ------- | :------: |
 | allowed\_origins | A List of origins which should be able to make cross-origin calls. | `list(string)` | `[]` | no |
 | allowed\_request\_types | The allowed request types for the public network. Possible values are `ClientConnection`, `ServerConnection`, `RESTAPI` and `Trace`. When `default_action` is `Allow`, `allowed_request_types` cannot be set. | `list(string)` | `null` | no |
 | client\_name | Client name/account used in naming. | `string` | n/a | yes |
@@ -116,7 +116,7 @@ module "signalr" {
 ## Outputs
 
 | Name | Description |
-|------|-------------|
+| ---- | ----------- |
 | hostname | The FQDN of the SignalR service. |
 | id | The ID of the SignalR service. |
 | module\_diagnostics | Diagnostics settings module outputs. |
