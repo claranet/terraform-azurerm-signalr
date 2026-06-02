@@ -1,6 +1,7 @@
 output "resource" {
   description = "Azure SignalR service object."
   value       = azurerm_signalr_service.main
+  sensitive   = true
 }
 
 output "module_diagnostics" {
